@@ -79,7 +79,7 @@
    })(jQuery);
   </script>
   {{ end }}
-  {{ if and (not (eq .Site.Params.Gitalk.Enable false)) (eq (.Params.disable_comments | default false) false) (eq .Type "posts")}}
+  {{ if and (not (eq .Site.Params.Gitalk.Enable false)) (eq (.Params.disable_comments | default false) false) (eq (.Params.comments | default false) true)}}
   <script>
     var gitalk = new Gitalk({
       clientID: '{{ .Site.Params.Gitalk.ClientID}}',
