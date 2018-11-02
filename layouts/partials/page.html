@@ -6,4 +6,8 @@
 
     {{ .Content }}
   </article>
+  {{ if and (not (eq .Site.Params.Gitalk.Enable false)) (eq (.Params.disable_comments | default false) false) (eq (.Params.comments | default false) true)}}
+    <div id="gitalk-container"></div>
+  {{ end }}
+<br/>
 </section>
