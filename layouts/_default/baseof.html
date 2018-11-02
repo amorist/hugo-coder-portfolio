@@ -45,7 +45,10 @@
       <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
       <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}
-
+    {{ if .Site.Params.Gitalk}}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+      <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    {{ end }}
     {{ .Hugo.Generator }}
   </head>
 
@@ -74,6 +77,20 @@
       });
     });
    })(jQuery);
+  </script>
+  {{ end }}
+  {{ if and (not (eq .Site.Params.Gitalk.Enable false)) (eq (.Params.disable_comments | default false) false)}}
+  <script>
+    var gitalk = new Gitalk({
+      clientID: '{{ .Site.Params.Gitalk.ClientID}}',
+      clientSecret: '{{ .Site.Params.Gitalk.ClientSecret}}',
+      repo: '{{ .Site.Params.Gitalk.Repo}}',
+      owner: '{{ .Site.Params.Gitalk.Owner}}',
+      admin: '{{ .Site.Params.Gitalk.Admin}}',
+      id: window.location.pathname,      // Ensure uniqueness and length less than 50
+      distractionFreeMode: '{{ .Site.Params.Gitalk.DistractionFreeMode}}',  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
   </script>
   {{ end }}
   </body>
