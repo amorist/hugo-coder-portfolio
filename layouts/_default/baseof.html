@@ -81,17 +81,6 @@
   {{ end }}
   {{ if and (not (eq .Site.Params.Gitalk.Enable false)) (eq (.Params.disable_comments | default false) false) (eq (.Params.comments | default false) true)}}
   <script>
-    // animating-urls http://matthewrayfield.com/articles/animating-urls-with-javascript-and-emojis/
-    function animatingUrl() {
-        var i, n, s = '';
-        for (i = 0; i < 10; i++) {
-            n = Math.floor(Math.sin((Date.now()/200) + (i/2)) * 4) + 4;
-            s += String.fromCharCode(0x2581 + n);
-        }
-        window.location.hash = s;
-        setTimeout(loop, 50);
-    }
-    animatingUrl();
     var gitalk = new Gitalk({
       clientID: '{{ .Site.Params.Gitalk.ClientID}}',
       clientSecret: '{{ .Site.Params.Gitalk.ClientSecret}}',
